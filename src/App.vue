@@ -1,10 +1,10 @@
 <template>
   <div>
 
-		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
 			<div class="container-fluid px-5">
-				<router-link class="navbar-brand ml-3 mr-5" to='/'>
-					<img id="logoMenu" src="/images/valoop-logo-colores.png" alt="Avatar" class="image">
+				<router-link class="navbar-brand ml-3 mr-5" to='/' id="divLogoMenu">
+					<img id="logoMenu" src="/images/Logotipo_valoop.svg" alt="Avatar" class="image">
 				</router-link>
 				
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -13,20 +13,17 @@
 				<div class="collapse navbar-collapse" id="navbarNavDropdown">
 					<ul class="navbar-nav">
 						<li class="nav-item px-1 mx-sm-1 px-xl-3">
-							<router-link class="nav-link" :to="{name: 'Buscador', params: {tipo: 'primera-puesta'}}">PRIMERA PUESTA</router-link>
-							<div class="text-center"><span class="subNav ">0 - 12 meses</span></div>
+							<router-link class="nav-link" :to="{name: 'Buscador', params: {tipo: 'primera-puesta'}}" exact>PRIMERA PUESTA <br> <div class="text-center"><span class="subNav ">0 - 12 meses</span></div></router-link>
 						</li>
 						<li class="nav-item px-1 mx-sm-1 px-xl-3">
-							<a class="nav-link" href="#">BEBÉ</a>
-							<div class="text-center"><span class="subNav ">6 - 24 meses</span></div>
+							<a class="nav-link" href="#">BEBÉ <br> <div class="text-center"><span class="subNav ">6 - 24 meses</span></div></a>
+							
 						</li>
 						<li class="nav-item px-1 mx-sm-1 px-xl-3">
-							<a class="nav-link" href="#">INFANTIL</a>
-							<div class="text-center"><span class="subNav ">2 - 12 años</span></div>
+							<a class="nav-link" href="#">INFANTIL <br> <div class="text-center"><span class="subNav ">2 - 12 años</span></div></a>
 						</li>
 						<li class="nav-item px-1 mx-sm-1 px-xl-3">
-							<a class="nav-link" href="#">VALOOP LOOK</a>
-							<div class="text-center"><span class="subNav ">Tendencias</span></div>
+							<a class="nav-link" href="#">VALOOP LOOK <br> <div class="text-center"><span class="subNav ">Tendencias</span></div></a>
 						</li>
 					</ul>
 					
@@ -34,8 +31,9 @@
 						<li class="nav-item px-1 mx-sm-1 px-xl-3 ">
 							<span class="icono"><i class="bi bi-search"></i></span>
 						</li>
-						<li class="nav-item px-1 mx-sm-1 px-xl-3 ">
+						<li class="nav-item px-1 mx-sm-1 px-xl-3 " data-bs-toggle="modal" data-bs-target="#modalIniciarSesion">
 							<span class="icono"><i class="bi bi-file-person"></i></span>
+							
 						</li>
 						<li class="nav-item px-1 mx-sm-1 px-xl-3 ">
 							<div type="button" class="icono position-relative">
@@ -76,6 +74,7 @@
 				</div>
 			</div>
 		</div>
+		<iniciarSesion />
 
 		<footer class="p-3">
 			<div class="container">
@@ -116,7 +115,13 @@
 		</footer>
   </div>
 </template>
+<script>
+import iniciarSesion from '@/components/iniciarSesion.vue';
 
+export default {
+	components:{iniciarSesion}
+}
+</script>
 
 <style>
 	@font-face {
@@ -202,25 +207,26 @@
 	background-color: #ffffff!important;
 }
 #logoMenu{ width: 14rem ;}
-.nav-item{ border-bottom: 2px solid #fff; transition: all 0.3s ease-in-out ;
+.nav-item, #divLogoMenu{ border-bottom: 2px solid #fff; transition: all 0.3s ease-in-out ;
 }
-.nav-item:hover{border-bottom: 2px solid #38beab; cursor:pointer;}
+.nav-item:hover, .router-link-exact-active{border-bottom: 2px solid #38beab; cursor:pointer;}
 .nav-link.active{color: #474747!important}
 .nav-link{font-weight: medium; padding-bottom: 0; color:#707070!important; letter-spacing: 1px; }
 .subNav{font-weight: 300; font-size: 80%; color:#79cbb5;}
-.nav-item>.icono{font-size:26px;}
+.nav-item .icono{font-size:26px;}
 #navIconos .badge{font-size: 10px; background-color: #EF798F!important; font-weight: 300; }
 
 h1,h2,h3,h4,h5{color:#79CBB5}
 
 #divBeneficios h5{ color:#000000; font-weight: lighter; font-size: 1.2rem; margin: 2rem 0; text-align: center;}
-#divBeneficios img{max-width: 13vw; margin: 0 auto;}
+#divBeneficios img{max-width: 9vw; margin: 0 auto;}
 
 footer{
 	background-color: #79cbb526;
 }
 footer p{
 	font-weight: lighter;
+  margin-bottom: 2px;
 }
 footer .bi-whatsapp{
 	font-size: 1.4rem;

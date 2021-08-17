@@ -24,7 +24,7 @@
 		</section>
 
 
-		<main class="container-fluid px-5">
+		<main class="container px-5">
 
 			<div class="row ">
 				<div class="col-12 col-md-6">
@@ -181,7 +181,7 @@
 						</div>
 					</div>
 				</div> -->
-				<ProductoVariante :inde="3" @activar="activaVariante" @desactivar="ocultarVariante" />
+				<ProductoVariante :inde="3" @activar="activaVariante" @desactivar="ocultarVariante" :foto="'/images/productos/prod4.png'" />
 			</div>
 
 
@@ -192,70 +192,21 @@
 	
 	</div>
 </template>
-
-<style scoped>
-
-.carousel-control-prev-icon { background-image:url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23EF798F' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E"); }
-.tarjetaBebes, .tarjetaValoop{position: relative;}
-.tarjetaBebes>.texto{
-	position: absolute;
-	top: 100PX;
-	left: 2vw;
-	color: white;
-	font-size: 2rem;}
-.tarjetaBebes>img{border-radius: 1rem!important;}
-.tarjetaBebes>.botonVer{position: absolute; bottom: 100px; right: 2vw; border-radius: 20px; padding: .1rem 2rem; border: 2px solid #fff; font-size: 1.5rem; }
-.tarjetaValoop>.botonVer{position: absolute; bottom: 30px; right: 9vw; border-radius: 20px; padding: .1rem 2rem; border: 2px solid #fff; font-size: 1.5rem; }
-.botonVer:hover{color:#BE9F73}
-
-.divVariantes{position: relative;}
-.variantes{position: absolute; width: 100%; bottom:0; height: 0; overflow: hidden; transition: all 0.3s ease-in-out;visibility:hidden; padding:0; margin-left: 0rem;left: 0;}
-.owl-carousel .owl-item img{
-	width: 95%!important;
-}
-
-.variantes.activo{height: 100px; padding: 0; background-color: rgba(255, 255, 255, 0.699);visibility:visible; padding: 1rem; }
-.variantes>div{
-	border:1px solid #000;
-	font-size: 0.8em;
-	font-weight: lighter;
-	cursor:pointer;
-	text-align: center;
-	padding: 3px;
-	transition: all 0.3s ease-in-out;
-	width: 30%;
-	margin: 5px 1%;
-	height: 30px;
-	
-}
-.variantes>div:hover{
-	background-color: #EF798F;	
-}
-.datosPrendas{font-weight: lighter;}
-.precioAnterior{color: #79cbb5; text-decoration:line-through;}
-.bolitas .color{
-	width: 30px; height: 30px; background-color: #ffffff; border-radius: 50%;
-	margin: 0 10px;
-}
-.tituloPrenda{font-size:1.1rem;}
-
-
-</style>
-
- 
-	<script>
+<script>
 	import ProductoVariante from '@/components/ProductoVariante.vue';
+		
 	export default {
 		name: 'Principal',
-		components:{ProductoVariante},
+		components:{
+			ProductoVariante
+		},
 		data(){
 			return {
 				hover:false
 			}
 		},
 		methods: {
-			activaVariante(index){
-				console.log( 'activa' );
+			activaVariante(index){ //console.log( 'activa' );
 				$('.owl-carousel').find('.item').eq(index).find('.variantes').addClass('activo')
 				//$(event.target).find('.variantes').addClass('activo')
 			},
@@ -267,7 +218,9 @@
 		mounted(){
 			require('../assets/css/owl.carousel.css')
 			require('../assets/js/owl.carousel.js')
-			$('.owl-carousel').owlCarousel();
+			$('.owl-carousel').owlCarousel({
+				items: 4
+			});
 
 			var divColores = document.getElementsByClassName('color');
 			[...divColores].forEach((divColor)=>{
@@ -310,4 +263,52 @@
 	
 
 	</script>
+
+<style scoped>
+
+.carousel-control-prev-icon { background-image:url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23EF798F' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E"); }
+.tarjetaBebes, .tarjetaValoop{position: relative;}
+.tarjetaBebes>.texto{
+	position: absolute;
+	top: 100PX;
+	left: 2vw;
+	color: white;
+	font-size: 2rem;}
+.tarjetaBebes>img{border-radius: 1rem!important;}
+.tarjetaBebes>.botonVer{position: absolute; bottom: 100px; right: 2vw; border-radius: 20px; padding: .1rem 2rem; border: 2px solid #fff; font-size: 1.5rem; }
+.tarjetaValoop>.botonVer{position: absolute; bottom: 30px; right: 9vw; border-radius: 20px; padding: .1rem 2rem; border: 2px solid #fff; font-size: 1.5rem; }
+.botonVer:hover{color:#BE9F73}
+
+.owl-carousel .owl-item img{
+	width: 95%!important;
+}
+.divVariantes{position: relative;}
+.variantes{position: absolute; width: 100%; bottom:0; height: 0; overflow: hidden; transition: all 0.3s ease-in-out;visibility:hidden; padding:0; margin-left: 0rem;left: 0;}
+.variantes.activo{height: 100px; padding: 0; background-color: rgba(255, 255, 255, 0.699);visibility:visible; padding: 1rem; }
+.variantes>div{
+	border:1px solid #000;
+	font-size: 0.8em;
+	font-weight: lighter;
+	cursor:pointer;
+	text-align: center;
+	padding: 3px;
+	transition: all 0.3s ease-in-out;
+	width: 30%;
+	margin: 5px 1%;
+	height: 30px;
+}
+.variantes>div:hover{ background-color: #EF798F;}
+.datosPrendas{font-weight: lighter;}
+.precioAnterior{color: #79cbb5; text-decoration:line-through;}
+.bolitas .color{
+	width: 30px; height: 30px; background-color: #ffffff; border-radius: 50%;
+	margin: 0 10px;
+}
+.tituloPrenda{font-size:1.1rem;}
+
+
+</style>
+
+ 
+	
 	

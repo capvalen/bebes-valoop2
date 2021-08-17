@@ -1,8 +1,8 @@
 <template>
 	<div class="  item">
 		<div class="row">
-			<div class="col-sm-12 divVariantes" @mouseover="activaVariante(inde)" @mouseleave="ocultarVariante(inde)">
-				<img src="images/productos/prod4.png" class="productosVariantes img-fluid">
+			<div class="col-sm-12 divVariantes" @mouseover="activaVariante(inde)" @mouseleave="ocultarVariante(inde)" >
+				<img :src="foto" class="productosVariantes img-fluid">
 				<div class="variantes row row-cols-3 ">
 					<div class=" ">7-8 años</div>
 					<div class=" ">8-10 años</div>
@@ -18,7 +18,7 @@
 					<span class="precioActual">S/ 28.00</span>
 				</div>
 				<div class="bolitas d-flex justify-content-center">
-					<div class="color" data-color="#FFFFFF"></div>
+					<div class="color"  v-for="(color) in colores" v-bind:key="color.index" :data-color="color"></div>
 				</div>
 			</div>
 		</div>
@@ -40,7 +40,7 @@ export default {
 		});
 	},
 	props:{
-		inde: Number
+		inde: Number, foto: String, colores: Array
 	},
 	methods: {
 		activaVariante(dat){
@@ -83,4 +83,7 @@ img{	width: 95%!important;}
 	margin: 0 10px;
 }
 .tituloPrenda{font-size:1.1rem;}
+.datosPrendas{
+	margin-bottom: 20px;
+}
 </style>
