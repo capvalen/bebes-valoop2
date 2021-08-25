@@ -140,7 +140,8 @@ export default {
     height: 1.2rem;
 	}
 	.form-check .form-check-label{padding-left: 1rem;}
-	#btnFacebook2{background-color: #405896; border:none;}
+	#btnFacebook{background-color: #405896; border:none;}
 	#btnGoogle{background-color: #e34133; border:none;}
 	#btnGoogle:hover{ background-color: #c13326; }
+	#btnFacebook:hover{ background-color: #2a4381; }
 </style>

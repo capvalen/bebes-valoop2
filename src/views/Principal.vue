@@ -1,7 +1,7 @@
 <template>
 	<div>
 		
-		<section class="container-fluid px-5">
+		<section class="container px-5">
 			<div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
 				<div class="carousel-inner">
 					<div class="carousel-item active">

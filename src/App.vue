@@ -36,7 +36,7 @@
 							
 						</li>
 						<li class="nav-item px-1 mx-sm-1 px-xl-3 ">
-							<div type="button" class="icono position-relative">
+							<div type="button" class="icono position-relative" data-bs-toggle="offcanvas" data-bs-target="#offCarrito" aria-controls="offCarrito">
 								<i class="bi bi-handbag"></i>
 								<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
 							</div>
@@ -49,9 +49,12 @@
 		</nav>
 
   	<router-view/>
+		<div class="container mt-5" >
+			<hr style="color: #9c9c9c;" />
+		</div>
 
 		<div class="container my-5">
-			<div class="row row-cols-5 " id="divBeneficios">
+			<div class="row row-cols-2 row-cols-lg-5  " id="divBeneficios">
 				<div>
 					<center><img src="/images/envio.svg" class="" ></center>
 					<h5>Envíos GRATIS <br>desde S/ 50.00</h5>
@@ -75,6 +78,7 @@
 			</div>
 		</div>
 		<iniciarSesion />
+		<carrito />
 
 		<footer class="p-3">
 			<div class="container">
@@ -84,7 +88,7 @@
 						<p>info@valoop.pe</p>
 						<p>977784115 (9h - 17h)</p>
 						<p><i class="bi bi-whatsapp"></i> 912547125</p>
-						<p><span><i class="bi bi-twitter"></i> </span> <span><i class="bi bi-facebook"></i></span> <span><i class="bi bi-instagram"></i></span></p>
+						<div ><span class="mx-2"><i class="bi bi-twitter"></i> </span> <span class="mx-2"><i class="bi bi-facebook"></i></span> <span class="mx-2"><i class="bi bi-instagram"></i></span></div>
 					</div>
 
 					<div>
@@ -117,9 +121,10 @@
 </template>
 <script>
 import iniciarSesion from '@/components/iniciarSesion.vue';
+import carrito from '@/components/Carrito.vue';
 
 export default {
-	components:{iniciarSesion}
+	components:{iniciarSesion, carrito}
 }
 </script>
 
@@ -184,6 +189,8 @@ export default {
 	99% { opacity: 0; z-index:1; }
 	100% { opacity: 0; display:none; position:fixed; z-index:-5; }
 }
+.ligero{font-weight: lighter;}
+.text-oscuro{color:#000;}
 
 #overlay>img{
 	display: block;
@@ -219,7 +226,7 @@ export default {
 h1,h2,h3,h4,h5{color:#79CBB5}
 
 #divBeneficios h5{ color:#000000; font-weight: lighter; font-size: 1.2rem; margin: 2rem 0; text-align: center;}
-#divBeneficios img{max-width: 9vw; margin: 0 auto;}
+#divBeneficios img{width: 7.5vw; margin: 0 auto;}
 
 footer{
 	background-color: #79cbb526;
