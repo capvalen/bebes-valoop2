@@ -305,7 +305,8 @@
 	margin: 0 10px;
 }
 .tituloPrenda{font-size:1.1rem;}
-
+.carousel-control-next-icon{background-image: url('/images/arrDerecha.svg')!important;}
+.carousel-control-prev-icon{background-image: url('/images/arrIzquierda.svg')!important;}
 
 </style>
 

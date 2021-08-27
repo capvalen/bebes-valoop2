@@ -2,25 +2,27 @@
 	<div>
 		<section class="container-fluid">
 			<div class="row">
-				<div class="col-md-3 col-lg-2 p-3 categorias">
-					<h5 class=""><i class="bi bi-tag"></i> Categorías</h5>
-					<ul class="list-group list-group-flush">
-					  <li class="list-group-item list-group-item-action">ABRIGO</li>
-					  <li class="list-group-item list-group-item-action">CONJUNTOS</li>
-					  <li class="list-group-item list-group-item-action">CHAQUETAS Y JERSEIS</li>
-					  <li class="list-group-item list-group-item-action">CAMISAS</li>
-					  <li class="list-group-item list-group-item-action">BODIES</li>
-					  <li class="list-group-item list-group-item-action">VESTIDOS</li>
-					  <li class="list-group-item list-group-item-action">FALDITAS</li>
-					  <li class="list-group-item list-group-item-action">PATUCOS</li>
-					  <li class="list-group-item list-group-item-action">PELELES</li>
-					  <li class="list-group-item list-group-item-action">COMPLEMENTOS</li>
-					</ul>
+				<div class="col-md-3 col-lg-2 pt-2 ps-0  categorias">
+					<div class="ps-2">
+						<h5 class=""><i class="bi bi-tag"></i> Categorías</h5>
+						<ul class="list-group list-group-flush">
+							<li class="list-group-item list-group-item-action">ABRIGO</li>
+							<li class="list-group-item list-group-item-action">CONJUNTOS</li>
+							<li class="list-group-item list-group-item-action">CHAQUETAS Y JERSEIS</li>
+							<li class="list-group-item list-group-item-action">CAMISAS</li>
+							<li class="list-group-item list-group-item-action">BODIES</li>
+							<li class="list-group-item list-group-item-action">VESTIDOS</li>
+							<li class="list-group-item list-group-item-action">FALDITAS</li>
+							<li class="list-group-item list-group-item-action">PATUCOS</li>
+							<li class="list-group-item list-group-item-action">PELELES</li>
+							<li class="list-group-item list-group-item-action">COMPLEMENTOS</li>
+						</ul>
+					</div>
 					<div id="botonVer" class=" p-2"> VER TODOS</div>
 				</div>
 				<div class="col-md-8 col-lg-9">
 					<div class="row ">
-						<div class="col-2" @mouseleave="ocultarFiltro()" id="spanFiltrar">
+						<div class="col-2 d-flex align-items-end" @mouseleave="ocultarFiltro()" id="spanFiltrar">
 							<span @click="mostrarFiltros()" id="spanIcoFiltro"><span ><img src="/images/filtrar.svg" alt=""> </span> <span>FILTRAR</span></span>
 							<div v-if="mostrarFiltro" class="p-2 container-fluid" id="cuadroFiltro">
 								<div @click="ocultarFiltro()" class="mt-2 mb-3" id="divEliminarFiltro">
@@ -125,10 +127,10 @@
 
 							</div>
 						</div>
-						<div class="col">
-							<h2 class=" text-center">PRIMERA PUESTA</h2>
+						<div class="col d-flex align-items-end justify-content-center">
+							<h2 class="mb-0">PRIMERA PUESTA</h2>
 						</div>
-						<div class="col-2" id="spanOrdenar">
+						<div class="col-2 d-flex align-items-end" id="spanOrdenar">
 							<span @click="mostrarOrdenados()"><span ><img src="/images/filtrar.svg" alt=""> </span> <span>ORDENAR</span></span>
 							<div class="p-3 " v-if="mostrarOrdenar" id="divOrdenar" @mouseleave="ocultarOrdenar()">
 								<p>Precio ascendente</p>
@@ -140,7 +142,7 @@
 						</div>
 					</div>
 
-					<div class="row row-cols-3">
+					<div class="row row-cols-3 mt-4 divProdResultantes">
 						<ProductoVariante class="prendaResultado" :inde="0" @activar="activaVariante" @desactivar="ocultarVariante" :foto="'/images/productos/Imagen_11.jpg'" :colores="['#ddd', 'purple']" @click="verDetalle('iid')" />
 						<ProductoVariante class="prendaResultado" :inde="1" @activar="activaVariante" @desactivar="ocultarVariante" :foto="'/images/productos/Imagen_12.jpg'" :colores="['#5cd24e', '#c5a42c', '#e13b8e']" @click="verDetalle('iid')" />
 						<ProductoVariante class="prendaResultado" :inde="2" @activar="activaVariante" @desactivar="ocultarVariante" :foto="'/images/productos/Imagen_13.jpg'" :colores="['aqua', '#9934d8', '#ef3b8e']" @click="verDetalle('iid')" />
@@ -158,10 +160,10 @@
 			<div class="modal-dialog modal-dialog-centered modal-xl">
 				<div class="modal-content">
 					<div class="modal-body p-3">
+						<div class="contenido container p-4">
 						<button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close"></button>
-						<div class="contenido p-4">
 							<div class="row">
-								<div class="col">
+								<div class="col ps-0">
 									<p><strong>CÓDIGO:</strong> <span class="ligero">VLP01</span></p>
 								</div>
 								<div class="col">
@@ -171,7 +173,7 @@
 									<p><span class="mx-3" id="spanAnterior">S/ 20.00</span> <span id="spanActual">S/ 18.00</span></p>
 								</div>
 							</div>
-							<div class="container-fluid">
+							<div class="container-fluid px-0">
 								<div class="row owl-carousel owl-theme">
 									<div class="">
 										<img :src="'/images/productos/det0.jpg'" alt="" class="img-fluid">
@@ -187,21 +189,21 @@
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="row">
-							<div class="col d-flex justify-content-start">
-								<span>TALLAS</span>
-								<div class="ligero mx-3 cajita"><p>0-3 meses</p></div>
-								<div class="ligero mx-3 cajita"><p>4-6 meses</p></div>
-								<div class="ligero mx-3 cajita"><p>7-9 meses</p></div>
+							<div class="row mt-4" >
+								<div class="col d-flex justify-content-start">
+									<span>TALLAS</span>
+									<div class="ligero mx-3 cajita"><p>0-3 meses</p></div>
+									<div class="ligero mx-3 cajita"><p>4-6 meses</p></div>
+									<div class="ligero mx-3 cajita"><p>7-9 meses</p></div>
+								</div>
 							</div>
-						</div>
-						<div class="row mt-3">
-							<div class="col">
-								<p>DESCRIPCIÓN</p>
-								<p class="ligero">Ranita con tejido tipo dobby con estructura de rayas azul medio, Cuello peter pan y engomado en la cintura. Apertura en la espalda y en el bajo.</p>
-								<p>COMPOSICIÓN: <span class="ligero">100% algodón peruano</span></p>
-								<div class="text-end"><button class="btn btn-primary btn-lg px-4 botonVerde" >Agregar a la cesta</button></div>
+							<div class="row mt-3">
+								<div class="col">
+									<p>DESCRIPCIÓN</p>
+									<p class="ligero">Ranita con tejido tipo dobby con estructura de rayas azul medio, Cuello peter pan y engomado en la cintura. Apertura en la espalda y en el bajo.</p>
+									<p>COMPOSICIÓN: <span class="ligero">100% algodón peruano</span></p>
+									<div class="text-end"><button class="btn btn-primary btn-lg px-4 botonVerde" >Agregar a la cesta</button></div>
+								</div>
 							</div>
 						</div>
 
@@ -233,8 +235,8 @@ export default {
 	},
 	mounted(){
 		modi = document.getElementById('modalDetalles');
-		require('../assets/css/owl.carousel.css')
-		require('../assets/js/owl.carousel.js')
+		require('@/assets/css/owl.carousel.css')
+		require('@/assets/js/owl.carousel.js')
 		$('.owl-carousel').owlCarousel({
 			items: 4
 		});
@@ -246,10 +248,10 @@ export default {
 		mostrarOrdenados(){ this.mostrarOrdenar=true; },
 		ocultarOrdenar(){ this.mostrarOrdenar=false; },
 		activaVariante(index){
-			$('.owl-carousel').find('.item').eq(index).find('.variantes').addClass('activo')
+			$('.divProdResultantes').find('.item').eq(index).find('.variantes').addClass('activo')
 		},
 		ocultarVariante(index){
-			$('.owl-carousel').find('.item').eq(index).find('.variantes').removeClass('activo')
+			$('.divProdResultantes').find('.item').eq(index).find('.variantes').removeClass('activo')
 		},
 		verDetalle(iid){
 			//llamar vía API a los detalles
@@ -286,23 +288,25 @@ ul li, #botonVer{
 #spanIcoFiltro, #spanOrdenar{cursor: pointer;}
 #spanFiltrar, #spanOrdenar{position: relative;}
 #cuadroFiltro{
-	top: 30px;
+	top: 40px;
 	position: absolute;
 	width: 300px;
 	height: 380px;
 	background-color: #272727c7;
 	color:white;
 	font-size: 0.9rem;
+	z-index: 10;
 }
 #divOrdenar{
-	top: 30px;
-	right: 0;
+	top: 40px;
+	right: 40px;
 	position: absolute;
 	width: 180px;
 	height: 180px;
 	background-color: #272727c7;
 	color:white;
 	font-size: 0.9rem;
+	z-index: 10;
 }
 #cuadroFiltro p { margin-bottom: 0; }
 #divOrdenar p { margin-bottom: 0.5rem; cursor:pointer; }
@@ -353,10 +357,19 @@ ul li, #botonVer{
 	cursor: pointer;
 }
 .botonVerde{
-		border-radius: 1.5rem;
-    background-color: #79CBB5!important;
-		border:none;
-	}
+	border-radius: 1.5rem;
+  background-color: #79CBB5!important;
+	border:none;
+}
+
+.owl-carousel .prev-slide{
+  background: url('/images/arrDerecha.svg') no-repeat scroll 0 0;
+  left: -33px;
+}
+.owl-carousel .next-slide{
+  background: url('/images/arrIzquierda.svg') no-repeat scroll -24px 0px;
+  right: -33px;
+}
 
 
 

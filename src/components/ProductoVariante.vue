@@ -86,4 +86,5 @@ img{	width: 95%!important;}
 .datosPrendas{
 	margin-bottom: 20px;
 }
+.item{cursor: pointer;}
 </style>
