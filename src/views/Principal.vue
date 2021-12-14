@@ -193,8 +193,7 @@
 	</div>
 </template>
 <script>
-	import ProductoVariante from '@/components/ProductoVariante.vue';
-		
+import ProductoVariante from '@/components/ProductoVariante.vue';
 	export default {
 		name: 'Principal',
 		components:{
@@ -307,7 +306,7 @@
 .tituloPrenda{font-size:1.1rem;}
 .carousel-control-next-icon{background-image: url('/images/arrDerecha.svg')!important;}
 .carousel-control-prev-icon{background-image: url('/images/arrIzquierda.svg')!important;}
-
+select, .filter-option-inner-inner{font-weight: 100!important;}
 </style>
 
  

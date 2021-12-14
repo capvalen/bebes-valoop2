@@ -20,7 +20,7 @@
 					</div>
 					<div id="botonVer" class=" p-2"> VER TODOS</div>
 				</div>
-				<div class="col-md-8 col-lg-9">
+				<div class="col-md-8 col-lg-9 ">
 					<div class="row ">
 						<div class="col-2 d-flex align-items-end" @mouseleave="ocultarFiltro()" id="spanFiltrar">
 							<span @click="mostrarFiltros()" id="spanIcoFiltro"><span ><img src="/images/filtrar.svg" alt=""> </span> <span>FILTRAR</span></span>

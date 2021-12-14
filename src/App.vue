@@ -48,83 +48,142 @@
 			</div>
 		</nav>
 
-  	<router-view/>
-		<div class="container mt-5" >
-			<hr style="color: #9c9c9c;" />
-		</div>
+		<router-view :adminLogin='adminLogin' />
 
-		<div class="container my-5">
-			<div class="row row-cols-2 row-cols-lg-5  " id="divBeneficios">
-				<div>
-					<center><img src="/images/envio.svg" class="" ></center>
-					<h5>Envíos GRATIS <br>desde S/ 50.00</h5>
-				</div>
-				<div>
-					<center><img src="/images/devolver.svg" class="" ></center>
-					<h5>Devoluciones <br>gratuitas</h5>
-				</div>
-				<div>
-					<center><img src="/images/tarjeta.svg" class="" ></center>
-					<h5>Pago fácil <br>y seguro</h5>
-				</div>
-				<div>
-					<center><img src="/images/reserva.svg" class="" ></center>
-					<h5>Reserva tu <br>pedido</h5>
-				</div>
-				<div>
-					<center><img src="/images/map.svg" class="" ></center>
-					<h5>Nuestras <br>tiendas</h5>
+  	<div v-if="!adminLogin">
+
+			<div class="container mt-5" >
+				<hr style="color: #9c9c9c;" />
+			</div>
+	
+			<div class="container my-5">
+				<div class="row row-cols-2 row-cols-lg-5  " id="divBeneficios">
+					<div>
+						<center><img src="/images/envio.svg" class="" ></center>
+						<h5>Envíos GRATIS <br>desde S/ 50.00</h5>
+					</div>
+					<div>
+						<center><img src="/images/devolver.svg" class="" ></center>
+						<h5>Devoluciones <br>gratuitas</h5>
+					</div>
+					<div>
+						<center><img src="/images/tarjeta.svg" class="" ></center>
+						<h5>Pago fácil <br>y seguro</h5>
+					</div>
+					<div>
+						<center><img src="/images/reserva.svg" class="" ></center>
+						<h5>Reserva tu <br>pedido</h5>
+					</div>
+					<div>
+						<center><img src="/images/map.svg" class="" ></center>
+						<h5>Nuestras <br>tiendas</h5>
+					</div>
 				</div>
 			</div>
+		
+		
+
 		</div>
+		
+
+		
+
 		<iniciarSesion />
 		<carrito />
 
-		<footer class="p-3">
-			<div class="container">
-				<div class="row row-cols-4">
-					<div>
-						<h5>CONTACTO</h5>
-						<p>info@valoop.pe</p>
-						<p>977784115 (9h - 17h)</p>
-						<p><i class="bi bi-whatsapp"></i> 912547125</p>
-						<div ><span class="mx-2"><i class="bi bi-twitter"></i> </span> <span class="mx-2"><i class="bi bi-facebook"></i></span> <span class="mx-2"><i class="bi bi-instagram"></i></span></div>
-					</div>
+			<footer class="p-3">
+				<div class="container">
+					<div class="row row-cols-1 row-cols-md-4">
+						<div>
+							<h5>CONTACTO</h5>
+							<p>info@valoop.pe</p>
+							<p>977784115 (9h - 17h)</p>
+							<p><i class="bi bi-whatsapp"></i> 912547125</p>
+							<div ><span class="mx-2"><i class="bi bi-twitter"></i> </span> <span class="mx-2"><i class="bi bi-facebook"></i></span> <span class="mx-2"><i class="bi bi-instagram"></i></span></div>
+						</div>
 
-					<div>
-						<h5>GUÍA DE COMPRA</h5>
-						<ul style="list-style: none;" class="p-0">
-							<li><i class="bi bi-chevron-double-right"></i> Envíos</li>
-							<li><i class="bi bi-chevron-double-right"></i> Cambios y devoluciones</li>
-							<li><i class="bi bi-chevron-double-right"></i> Aviso legal</li>
-							<li><i class="bi bi-chevron-double-right"></i> Pago fácil y seguro</li>
-						</ul>
-					</div>
+						<div>
+							<h5>GUÍA DE COMPRA</h5>
+							<ul style="list-style: none;" class="p-0">
+								<li><i class="bi bi-chevron-double-right"></i> Envíos</li>
+								<li><i class="bi bi-chevron-double-right"></i> Cambios y devoluciones</li>
+								<li><i class="bi bi-chevron-double-right"></i> Aviso legal</li>
+								<li><i class="bi bi-chevron-double-right"></i> Pago fácil y seguro</li>
+							</ul>
+						</div>
 
-					<div>
-						<h5>ATENCIÓN AL CLIENTE</h5>
-						<p>cliente@valoop.pe</p>
-						<p>977784115</p>
-						<p>Lunes a Viernes de 9:00h a 17:00h</p>
-						<p>Sugerencias</p>
-					</div>
+						<div>
+							<h5>ATENCIÓN AL CLIENTE</h5>
+							<p>cliente@valoop.pe</p>
+							<p>977784115</p>
+							<p>Lunes a Viernes de 9:00h a 17:00h</p>
+							<p>Sugerencias</p>
+						</div>
 
-					<div>
-						<h5>MI CUENTA</h5>
-						<p style="line-height: 2rem;">Consulte desde aquí el estado <br>de tus pedidos</p>
-						<button class="btn btn-success px-4" id="btnIngresar">INGRESAR</button>
+						<div>
+							<h5>MI CUENTA</h5>
+							<p style="line-height: 2rem;">Consulte desde aquí el estado <br>de tus pedidos</p>
+							<button class="btn btn-success px-4" id="btnIngresar" data-bs-toggle="modal" data-bs-target="#modalInicioAdmin">INGRESAR</button>
+						</div>
+					</div>
+				</div>
+			</footer>
+		
+	
+			<!-- Modal inicio de admin -->
+			<div class="modal fade" id="modalInicioAdmin" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-center">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="staticBackdropLabel">Acceder al panel</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<input type="text" name="" placeholder="Usuario" class="form-control my-1">
+							<input type="password" name="" placeholder="Contraseña" class="form-control my-1">
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="accederPanel()">Acceder</button>
+						</div>
 					</div>
 				</div>
 			</div>
-		</footer>
+			
   </div>
 </template>
 <script>
 import iniciarSesion from '@/components/iniciarSesion.vue';
 import carrito from '@/components/Carrito.vue';
 
+
 export default {
-	components:{iniciarSesion, carrito}
+	data(){
+		return {
+			adminLogin:false
+		}
+	},
+	components:{iniciarSesion, carrito},
+	methods:{
+		accederPanel(){
+			this.adminLogin=true;
+			localStorage.adminLogin = this.adminLogin;
+			this.$router.push({ path:'panel'})
+		},
+		
+	},
+	mounted(){
+		if(localStorage.adminLogin ==null ){
+			this.adminLogin=false;
+			localStorage.adminLogin = false;
+		}else{
+			if( localStorage.adminLogin==='true' ){
+				this.adminLogin = true;
+				this.$router.push({ path:'panel'})
+			}else{
+				this.adminLogin=false;
+			}
+		}
+	}
 }
 </script>
 

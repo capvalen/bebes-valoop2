@@ -19,6 +19,11 @@ const routes = [
     name: 'Buscador',
     component: () => import('../views/Buscador.vue')
   },
+	{
+    path: '/panel',
+    name: 'Panel',
+    component: () => import('../views/Panel.vue')
+  },
 ]
 
 const router = createRouter({
