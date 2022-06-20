@@ -17,7 +17,7 @@
 			</div>
 			<table class="table table-hover">
 				<thead>
-					<tr>
+					<tr >
 						<th>N°</th>
 						<th>Cod.</th>
 						<th>Nombre</th>
@@ -29,41 +29,21 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr @click="abrirOff()">
-						<td>1</td>
-						<td>VL42</td>
-						<td>Vestido Polo rayas</td>
-						<td>28.00</td>
-						<td>5</td>
-						<td>Primera puesta</td>
-						<td>Camisa</td>
-						<td>0-2 meses</td>
-					</tr>
-					<tr @click="abrirOff()">
-						<td>2</td>
-						<td>VL62</td>
-						<td>Polo Pique Rosa</td>
-						<td>19.00</td>
-						<td>4</td>
-						<td>Infantil</td>
-						<td>Polo</td>
-						<td>4-6 años</td>
-					</tr>
-					<tr @click="abrirOff()">
-						<td>2</td>
-						<td>VL12</td>
-						<td>Bañador espíral rosa</td>
-						<td>30.00</td>
-						<td>20</td>
-						<td>Infantil</td>
-						<td>Bañador</td>
-						<td>4-6 años</td>
+					<tr v-for="(producto, index) in productos" :key="producto.id" @click="abrirOff(index)">
+						<td>{{index+1}}</td>
+						<td>VL{{producto.id}}</td>
+						<td class="text-capitalize">{{producto.nombre.toLowerCase()}}</td>
+						<td>{{parseFloat(producto.precioActual).toFixed(2)}}</td>
+						<td>{{producto.stock}}</td>
+						<td>{{producto.rango}}</td>
+						<td>{{producto.categoria}}</td>
+						<td>{{tallasEnComas(index)}}</td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
 
-		<!-- Modal -->
+		<!-- Modal nuevo producto -->
 		<div class="modal fade" id="modalNuevoProducto" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 		  <div class="modal-dialog modal-dialog-center">
 		    <div class="modal-content">
@@ -86,19 +66,19 @@
 						  <label for="floComposicion">Composición</label> 
 						</div>
 						<div class="form-floating mb-3">
-						  <input type="text" class="form-control form-control-sm" id="floStock" placeholder=" " v-model="stock">
+						  <input type="text" class="form-control form-control-sm" id="floStock" placeholder=" " v-model="stock" min=0>
 						  <label for="floStock">Stock inicial</label> 
 						</div>
 						<div class="row row-cols-2">
 							<div class="col">
 								<div class="form-floating mb-3">
-									<input type="number" class="form-control form-control-sm" id="floPrecioAnt" placeholder=" " v-model="precioAnterior">
+									<input type="number" class="form-control form-control-sm" id="floPrecioAnt" placeholder=" " v-model="precioAnterior" min=0>
 									<label for="floPrecioAnt">Precio Anterior</label>
 								</div>
 							</div>
 							<div class="col">
 								<div class="form-floating mb-3">
-									<input type="number" class="form-control form-control-sm" id="floPrecioAct" placeholder=" " v-model="precioActual">
+									<input type="number" class="form-control form-control-sm" id="floPrecioAct" placeholder=" " v-model="precioActual" min=0>
 									<label for="floPrecioAct">Precio Actual</label>
 								</div>
 							</div>
@@ -131,11 +111,15 @@
 						<select class="selectpicker" id="sltTallasPanel" data-live-search="true" data-width="100%" multiple>
 						  <option v-for="talla in tallas" :key="talla.id" :value="talla.id">{{talla.talla}}</option>
 						</select>
+						<label for="" class="form-label mt-2">Foto Principal</label>
+						<div class="mb-3">
+						  <input class="form-control" type="file" id="formFile" ref="archivo" @change="cargarArchivo()" accept="image/png, image/gif, image/jpeg">
+						</div>
 						
 
 		      </div>
 		      <div class="modal-footer">
-		        <button type="button" class="btn btn-primary" @click="crearProducto()"><i class="bi bi-save"></i> Crear producto</button>
+		        <button type="button" class="btn btn-primary" @click="guardarPrimeroFoto()"><i class="bi bi-save"></i> Crear producto</button>
 		      </div>
 		    	</div>
 		  	</div>
@@ -145,7 +129,7 @@
 		<!-- Panel lateral -->
 		<div class="offcanvas offcanvas-end" tabindex="-1" id="myOffcanvas" aria-labelledby="offcanvasExampleLabel">
 		  <div class="offcanvas-header">
-		    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Bañador espíral rosa</h5>
+		    <h5 class="offcanvas-title" id="offcanvasExampleLabel">{{nombre}}</h5>
 		    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
 		  </div>
 		  <div class="offcanvas-body">
@@ -153,29 +137,23 @@
 					<button type="button" class="btn btn-outline-dark"><i class="bi bi-pen"></i> Editar Producto</button>
 				</div>
 
-				<img src="/images/productos/det0.jpg" class="img-fluid">
+				<img :src="'./images/productos/'+foto" class="img-fluid">
 				<p class="mt-2"><strong>Descripción:</strong></p>
-		    <div>
-		      Ranita con tejido tipo dobby con estructura de rayas azul medio, Cuello peter pan y engomado en la cintura. Apertura en la espalda y en el bajo.
-		    </div>
+		    <div v-html="descripcion"></div>
 				<p><strong>Composición:</strong></p>
 		    <div>100% algodon</div>
 				<p><strong>Precio:</strong></p>
-		    <div><span><del>S/ 65.00</del></span> S/ 50.00</div>
+		    <div><span><del v-if="precioAnterior>0">S/ {{parseFloat(precioAnterior).toFixed(2)}}</del></span> S/ {{parseFloat(precioActual).toFixed(2)}}</div>
 				<p><strong>Tallas:</strong></p>
-				<ul>
-					<li>0-3 Meses</li>
-					<li>4-6 Meses</li>
-					<li>7-9 Meses</li>
+				<ul v-html="tallasUl">
 				</ul>
 				<p><strong>Colores:</strong></p>
 				<div class="mb-3 row row-cols-4" id="colores">
-					<div data-color="#ddd" ></div>
-					<div data-color="#F3796F" ></div>
-					<div data-color="#162E30" ></div>
+					<div v-for="color in colores" :key="color.id" :data-color="color" :style="'background-color: ' + color" ></div>
+					
 				</div>
 
-		    <button type="button" class="btn btn-outline-danger"><i class="bi bi-trash"></i> Eliminar</button>
+		    <button type="button" class="btn btn-outline-danger" @click="borrarProducto()"><i class="bi bi-trash"></i> Eliminar</button>
 
 	  </div>
 
@@ -201,10 +179,8 @@ export default {
 	mounted(){
 		//console.log( this.adminLogin );
 		myOffcanvas= new bootstrap.Offcanvas(document.getElementById('myOffcanvas'));
-		var colores = document.querySelectorAll('#colores div');
-		colores.forEach(color=>{
-			color.style.background = color.getAttribute('data-color')
-		});
+		
+		this.cargarProductos();
 		this.listarRangos();
 		this.listarCategorias();
 		this.listarTallas();
@@ -212,18 +188,44 @@ export default {
 	},
 	data(){
 		return {
-			nombre: '', descripcion:'', composicion:'', precioActual:0, precioAnterior:0, idRango:'', idCategoria:'', stock:0, 
+			id:'', nombre: '', descripcion:'', composicion:'', precioActual:0, precioAnterior:0, idRango:'', idCategoria:1, stock:0, 
 			categoria:'', talla:'', colores:[],
-			rangos:[], categorias:[], tallas:[]
+			rangos:[], categorias:[], tallas:[], foto:'', archivo:'',
+			productos:[], tallasUl:''
 		}
 	},
 	methods:{
+		/* cargarColores(){
+			var colores = document.querySelectorAll('#colores div');
+			colores.forEach(color=>{
+				color.style.background = color.getAttribute('data-color')
+			});
+		}, */
 		cerrarSesion(){
 			localStorage.removeItem('adminLogin');
 			this.$router.push({ path:'/'});
 		},
-		abrirOff(){
+		abrirOff(index){
+			this.id = this.productos[index].id;
+			this.foto = this.productos[index].foto;
+			this.nombre = this.productos[index].nombre;
+			this.composicion = this.productos[index].composicion;
+			this.precioAnterior = this.productos[index].precioAnterior;
+			this.precioActual = this.productos[index].precioActual;
+			this.stock = this.productos[index].stock;
+			this.descripcion = this.productos[index].descripcion.replace(/\r?\n/g, "<br>");
+			this.colores = this.productos[index].colores;
+			
+			//this.cargarColores();
+			this.tallasEnUl(index);
 			myOffcanvas.show();
+		},
+		cargarProductos(){
+			axios.post(this.nombreApi + 'listarProductos.php')
+			.then((response)=>{ console.log( response.data );
+				this.productos = response.data;
+			})
+			.catch((error)=>{ console.log( error );});
 		},
 		crearProducto(){
 			this.talla = $('#sltTallasPanel').val();
@@ -237,7 +239,9 @@ export default {
 				categoria: this.idCategoria,
 				tallas: this.talla,
 				codPers: '',
-				colores: this.colores
+				colores: this.colores,
+				foto: this.foto,
+				stock: this.stock
 			})
 			.then((response)=>{ console.log( response.data );})
 			.catch((error)=>{ console.log( error );});
@@ -269,7 +273,78 @@ export default {
 				$('.selectpicker').selectpicker('refresh');
 			})
 
+		},
+		cargarArchivo(){
+			this.archivo = this.$refs.archivo.files[0];
+		},
+		guardarPrimeroFoto(){
+			var that = this;
+			if(document.getElementById("formFile").files.length==0){
+				//Sin foto
+				this.foto='';
+				this.crearProducto();
+			}else{
+				//con foto
+				let formData = new FormData();
+				formData.append('archivo', this.archivo);
+				formData.append('ruta', this.rutaDocs);
+				axios.post(this.nombreApi+'/subirFoto.php', formData, {
+					headers: {
+						'Content-Type' : 'multipart/form-data'
+					}
+				}).then( function (response){
+					var comoEs= response.data;
+					console.log( comoEs );
+					if( comoEs =='Error subida' ){
+						console.log( 'error de subida 1' );
+					}
+					if(comoEs != 'Error subida'){ //subió bien
+						that.foto=comoEs;
+						//guardar producto
+						that.crearProducto();
+					}
+				}).catch(function(){
+					console.log( 'error subiendo foto' );
+					
+				})
+			}
+		},
+		tallasEnComas: function(queModifico){
+			var letras = '';
+			for(let i=0; i<this.productos[queModifico].tallas.length; i++ ){
+				letras+= this.productos[queModifico].tallas[i];
+				if( i<this.productos[queModifico].tallas.length-1){
+					letras+=', ';
+				}
+			}
+			return letras;
+		},
+		tallasEnUl: function(queModifico){
+			this.tallasUl='';
+			for(let i=0; i<this.productos[queModifico].tallas.length; i++ ){
+				this.tallasUl+= "<li>"+ this.productos[queModifico].tallas[i] + "</li>";
+			}
+		},
+		borrarProducto(){
+			var that= this;
+			if(confirm(`¿Desea eliminar el producto ${this.nombre}?`)){
+				axios.post(this.nombreApi + 'borrarProducto.php', {
+				idBorrar: this.id
+			})
+				.then((response)=>{ console.log( response.data );
+					if(response.data=='ok'){
+						myOffcanvas.hide();
+						that.cargarProductos();
+					}else{
+						alert('Hubo un error borrando el producto, intentelo nuevamente más tarde')
+					}
+				})
+				.catch((error)=>{ console.log( error );});
+			}
 		}
+	},
+	computed:{
+		
 	}
 }
 </script>
@@ -302,8 +377,8 @@ tbody>tr{
 	/* background-color: red; */
 	border-radius: 50%;
 }
-/deep/ .filter-option-inner-inner, /deep/ .dropdown-item>.text, /deep/ .bs-searchbox>input{font-weight: 100!important;}
-/deep/ .bootstrap-select>.dropdown-toggle{
+:deep .filter-option-inner-inner, :deep .dropdown-item>.text, :deep .bs-searchbox>input{font-weight: 100!important;}
+:deep .bootstrap-select>.dropdown-toggle{
 	display: block;
   width: 100%;
   padding: 0.375rem 2.25rem 0.375rem 0.75rem;

@@ -165,12 +165,15 @@ onAuthStateChanged(auth, (user) => {
     // User is signed in, see docs for a list of available properties
     // https://firebase.google.com/docs/reference/js/firebase.User
     const uid = user.uid;
-		console.log( 'existo' + user.email );
-    // ...
-  } else {
-    // User is signed out
-    // ...
-		console.log( 'no exist' );
+		console.log( 'Existo usuario con el correo: ' + user.email );
+		//hay un usuario
+		if(uid == "VyYOEfE2B7MFHf5sujA6kgrOVin1"){ //soy el admin
+			localStorage.setItem('adminLogin', true);
+			location.reload();
+		}
+	}else {
+    // Mp hay nadie logueado
+		console.log( 'No se loguearon en este momento' );
   }
 });
 
